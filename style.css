@@ -151,6 +151,7 @@ nav a:hover {
     max-height: 0;
     overflow: hidden;
     transition: all 0.3 ease-in-out;
+    z-index: 10;
 }
 
 .menu-links a {
@@ -224,6 +225,8 @@ section {
     height: 400px;
     width: 400px;
     margin: auto 0;
+    position: relative;
+    z-index: 5;
 }
 
 .section__text {
