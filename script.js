@@ -4,3 +4,9 @@ function toggleMenu() {
     menu.classList.toggle("open")
     icon.classList.toggle("open")
 }
+
+window.onload = function () {
+    if (performance.navigation.type === 1) {
+        window.location.hash = "";
+    }
+};
