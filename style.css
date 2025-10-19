@@ -435,6 +435,44 @@ article .icon {
     border-color: var(--container-border);
 }
 
+.project-btn.github-btn {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+/* Hide the text on hover */
+.project-btn.github-btn:hover {
+  color: transparent;
+}
+
+/* GitHub icon appears when hovering */
+.project-btn.github-btn::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  transform: translate(-50%, -50%);
+  background-image: url('./assets/github_dark.png'); /* update path if needed */
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* When dark mode is active */
+@media (prefers-color-scheme: dark) {
+  .project-btn.github-btn::after {
+    background-image: url('./assets/github_light.png');
+  }
+}
+
+.project-btn.github-btn:hover::after {
+  opacity: 1;
+}
+
+
 /* CONTACT */
 
 #contact {
