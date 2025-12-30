@@ -54,7 +54,7 @@
     
     /* Timeline responsive */
     .timeline-content {
-        width: 100%;
+        width: 80%;
         margin-left: 0 !important;
     }
     .timeline::before {
@@ -66,18 +66,34 @@
         width: 100px;
         height: 100px;
     }
-    .tech-icon {
-        font-size: 2.5rem;
+    .tech-logo {
+        width: 50px;
+        height: 50px;
+    }
+    
+    /* Popup responsive */
+    .timeline-popup {
+        min-width: 85%;
+        padding: 2rem;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    /* Timeline for tablets */
+    .timeline-content {
+        width: 90%;
     }
 }
 
 @media screen and (max-width: 600px) {
     #contact, footer {
-        height: 40vh;
+        height: fit-content;
+        min-height: 40vh;
     }
     #profile {
         height: 83vh;
         margin-bottom: 0;
+        gap: 2rem;
     }
     article {
         font-size: 1rem;    
@@ -91,6 +107,7 @@
     }
     .contact-info-container {
         margin: 0;
+        width: 100%;
     }
     .contact-info-container p, .nav-links li a{
         font-size: 1rem;
@@ -104,17 +121,24 @@
         text-align: center;
     }
     .section__pic-container {
-        width: auto;
-        height: 46vw;
-        justify-content: center;
+        width: 250px;
+        height: 250px;
+        margin: 0 auto 1rem;
     }
     .title {
         font-size: 2rem;
     }
+    .section__text .title {
+        font-size: 2.5rem;
+    }
+    .typing-text {
+        font-size: 1.3rem;
+    }
     
     /* About section mobile */
     .about-image-container {
-        width: 250px;
+        width: 100%;
+        max-width: 300px;
         height: 350px;
     }
     .about-text-content h2 {
@@ -125,24 +149,103 @@
     }
     
     /* Tech stack mobile */
-    .tech-item {
-        width: 80px;
-        height: 80px;
+    .tech-scroll-container {
+        padding: 1rem 0;
     }
-    .tech-icon {
-        font-size: 2rem;
+    .tech-scroll {
+        gap: 2rem;
+    }
+    .tech-item {
+        width: 90px;
+        height: 90px;
+    }
+    .tech-logo {
+        width: 45px;
+        height: 45px;
     }
     .tech-name {
         font-size: 0.75rem;
     }
     
+    /* Timeline mobile */
+    .timeline-content {
+        width: 100%;
+        padding: 1.5rem;
+    }
+    .timeline-logo {
+        width: 50px;
+        height: 50px;
+    }
+    .timeline-title {
+        font-size: 1.1rem;
+    }
+    .timeline-company {
+        font-size: 0.9rem;
+    }
+    .timeline-description {
+        font-size: 0.85rem;
+    }
+    
+    /* Popup mobile */
+    .timeline-popup {
+        min-width: 95%;
+        padding: 1.5rem;
+        max-height: 85vh;
+    }
+    .popup-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .popup-logo {
+        width: 60px;
+        height: 60px;
+        align-self: flex-start;
+    }
+    .popup-title {
+        font-size: 1.2rem;
+    }
+    .popup-company {
+        font-size: 1rem;
+    }
+    .responsibilities-list li {
+        font-size: 0.9rem;
+        padding-left: 1.5rem;
+    }
+    
     /* Projects mobile */
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    .project-card {
+        max-width: 100%;
+    }
     .project-tags {
         gap: 0.5rem;
     }
     .tag {
         font-size: 0.7rem;
         padding: 0.4rem 0.8rem;
+    }
+    .tag-icon {
+        width: 16px;
+        height: 16px;
+    }
+    
+    /* Buttons mobile */
+    .btn-container {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    .project-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .project-btn {
+        width: 100%;
     }
     
     /* Disable custom cursor on mobile */
@@ -151,5 +254,70 @@
     }
     .custom-cursor, .cursor-dot {
         display: none;
+    }
+    
+    /* Section spacing mobile */
+    section {
+        padding-top: 6vh;
+        margin: 0 5%;
+    }
+    .section-title {
+        margin-bottom: 2rem;
+    }
+    
+    /* Particles mobile */
+    .particle {
+        width: 3px;
+        height: 3px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    /* Extra small devices */
+    .section__pic-container {
+        width: 200px;
+        height: 200px;
+    }
+    .section__text .title {
+        font-size: 2rem;
+    }
+    .typing-text {
+        font-size: 1.1rem;
+    }
+    .about-image-container {
+        height: 300px;
+    }
+    .tech-item {
+        width: 80px;
+        height: 80px;
+    }
+    .tech-logo {
+        width: 40px;
+        height: 40px;
+    }
+    .timeline-popup {
+        padding: 1rem;
+    }
+    .popup-title {
+        font-size: 1.1rem;
+    }
+}
+
+/* Landscape mobile */
+@media screen and (max-height: 600px) and (orientation: landscape) {
+    #profile {
+        height: auto;
+        min-height: 100vh;
+        padding: 6rem 0 2rem;
+    }
+    .section__pic-container {
+        width: 200px;
+        height: 200px;
+    }
+    .particles {
+        display: none;
+    }
+    .timeline-popup {
+        max-height: 90vh;
     }
 }

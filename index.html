@@ -21,7 +21,6 @@
             <ul class="nav-links">
                 <li><a href="#profile" class="nav-link">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Tech Stack</a></li>
                 <li><a href="#experience" class="nav-link">Experience</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -41,7 +40,6 @@
             <div class="menu-links">
                 <li><a href="#profile" onclick="toggleMenu()">Home</a></li>
                 <li><a href="#about" onclick="toggleMenu()">About</a></li>
-                <li><a href="#skills" onclick="toggleMenu()">Tech Stack</a></li>
                 <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
                 <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
                 <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
@@ -83,7 +81,7 @@
         
         <div class="about-content">
             <div class="about-image-container">
-                <img src="./assets/about-pic-1.jpg" alt="Aditya Varma">
+                <img src="./assets/profile-pic-1.png" alt="Aditya Varma">
             </div>
             <div class="about-text-content">
                 <h2>Who Am I?</h2>
@@ -102,27 +100,88 @@
         
         <div class="tech-scroll-container">
             <div class="tech-scroll">
-                <div class="tech-item"><div class="tech-icon">🐍</div><div class="tech-name">Python</div></div>
-                <div class="tech-item"><div class="tech-icon">⚛️</div><div class="tech-name">React</div></div>
-                <div class="tech-item"><div class="tech-icon">📦</div><div class="tech-name">TensorFlow</div></div>
-                <div class="tech-item"><div class="tech-icon">☕</div><div class="tech-name">Java</div></div>
-                <div class="tech-item"><div class="tech-icon">🌐</div><div class="tech-name">JavaScript</div></div>
-                <div class="tech-item"><div class="tech-icon">🔧</div><div class="tech-name">Git</div></div>
-                <div class="tech-item"><div class="tech-icon">🤖</div><div class="tech-name">PyTorch</div></div>
-                <div class="tech-item"><div class="tech-icon">💾</div><div class="tech-name">MySQL</div></div>
-                <div class="tech-item"><div class="tech-icon">🎯</div><div class="tech-name">Arduino</div></div>
-                <div class="tech-item"><div class="tech-icon">🍓</div><div class="tech-name">Raspberry Pi</div></div>
+                <!-- Add actual logo images here. Example: -->
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="tech-logo">
+                    <div class="tech-name">Python</div>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="tech-logo">
+                    <div class="tech-name">React</div>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TensorFlow" class="tech-logo">
+                    <div class="tech-name">TensorFlow</div>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" class="tech-logo">
+                    <div class="tech-name">Java</div>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="tech-logo">
+                    <div class="tech-name">JavaScript</div>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="tech-logo">
+                    <div class="tech-name">Git</div>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="PyTorch" class="tech-logo">
+                    <div class="tech-name">PyTorch</div>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" class="tech-logo">
+                    <div class="tech-name">MySQL</div>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="Arduino" class="tech-logo">
+                    <div class="tech-name">Arduino</div>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg" alt="Raspberry Pi" class="tech-logo">
+                    <div class="tech-name">Raspberry Pi</div>
+                </div>
                 <!-- Duplicate for seamless loop -->
-                <div class="tech-item"><div class="tech-icon">🐍</div><div class="tech-name">Python</div></div>
-                <div class="tech-item"><div class="tech-icon">⚛️</div><div class="tech-name">React</div></div>
-                <div class="tech-item"><div class="tech-icon">📦</div><div class="tech-name">TensorFlow</div></div>
-                <div class="tech-item"><div class="tech-icon">☕</div><div class="tech-name">Java</div></div>
-                <div class="tech-item"><div class="tech-icon">🌐</div><div class="tech-name">JavaScript</div></div>
-                <div class="tech-item"><div class="tech-icon">🔧</div><div class="tech-name">Git</div></div>
-                <div class="tech-item"><div class="tech-icon">🤖</div><div class="tech-name">PyTorch</div></div>
-                <div class="tech-item"><div class="tech-icon">💾</div><div class="tech-name">MySQL</div></div>
-                <div class="tech-item"><div class="tech-icon">🎯</div><div class="tech-name">Arduino</div></div>
-                <div class="tech-item"><div class="tech-icon">🍓</div><div class="tech-name">Raspberry Pi</div></div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="tech-logo">
+                    <div class="tech-name">Python</div>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="tech-logo">
+                    <div class="tech-name">React</div>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TensorFlow" class="tech-logo">
+                    <div class="tech-name">TensorFlow</div>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" class="tech-logo">
+                    <div class="tech-name">Java</div>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="tech-logo">
+                    <div class="tech-name">JavaScript</div>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="tech-logo">
+                    <div class="tech-name">Git</div>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="PyTorch" class="tech-logo">
+                    <div class="tech-name">PyTorch</div>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" class="tech-logo">
+                    <div class="tech-name">MySQL</div>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="Arduino" class="tech-logo">
+                    <div class="tech-name">Arduino</div>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg" alt="Raspberry Pi" class="tech-logo">
+                    <div class="tech-name">Raspberry Pi</div>
+                </div>
             </div>
         </div>
     </section>
@@ -136,81 +195,93 @@
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <div class="timeline-basic">
-                        <div class="timeline-date">Jun 2024 - Sep 2025</div>
-                        <h3 class="timeline-title">IoT/IIoT Engineer</h3>
-                        <p class="timeline-company">Intel IoT Club</p>
-                        <p class="timeline-description">Designed and simulated IoT projects using microcontrollers...</p>
-                    </div>
-                    <div class="timeline-detailed">
-                        <div class="detailed-header">
+                    <img src="./assets/intel_iot_club_logo.png" alt="Intel IoT Club" class="timeline-logo">
+                    <div class="timeline-date">Jun 2024 - Sep 2025</div>
+                    <h3 class="timeline-title">IoT/IIoT Engineer</h3>
+                    <p class="timeline-company">Intel IoT Club</p>
+                    <p class="timeline-description">Designed and simulated IoT projects using microcontrollers and coordinated teams for execution.</p>
+                    
+                    <!-- Popup Detail -->
+                    <div class="timeline-popup">
+                        <div class="popup-header">
                             <div>
-                                <div class="timeline-date">Jun 2024 - Sep 2025</div>
-                                <h3 class="timeline-title">IoT/IIoT Engineer</h3>
-                                <p class="timeline-company">Intel IoT Club</p>
+                                <h3 class="popup-title">IoT/IIoT Engineer</h3>
+                                <p class="popup-company">Intel IoT Club</p>
+                                <p class="popup-date">Jun 2024 - Sep 2025</p>
                             </div>
-                            <img src="./assets/intel_iot_club_logo.png" alt="Intel IoT Club" class="timeline-logo">
+                            <img src="./assets/intel_iot_club_logo.png" alt="Intel IoT Club" class="popup-logo">
                         </div>
-                        <ul class="responsibilities-list">
-                            <li>Led design and simulation of complex IoT projects using Arduino and ESP32</li>
-                            <li>Coordinated cross-functional teams for project execution and delivery</li>
-                            <li>Implemented sensor integration and data acquisition systems</li>
-                            <li>Developed real-time monitoring solutions for industrial applications</li>
-                        </ul>
+                        <div class="popup-content">
+                            <h4>Key Responsibilities:</h4>
+                            <ul class="responsibilities-list">
+                                <li>Led design and simulation of complex IoT projects using Arduino and ESP32</li>
+                                <li>Coordinated cross-functional teams for project execution and delivery</li>
+                                <li>Implemented sensor integration and data acquisition systems</li>
+                                <li>Developed real-time monitoring solutions for industrial applications</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <div class="timeline-basic">
-                        <div class="timeline-date">May 2025</div>
-                        <h3 class="timeline-title">Software Engineering Intern</h3>
-                        <p class="timeline-company">Piserve</p>
-                        <p class="timeline-description">Performed software testing and built microservices...</p>
-                    </div>
-                    <div class="timeline-detailed">
-                        <div class="detailed-header">
+                    <img src="./assets/Piserve_logo.png" alt="Piserve" class="timeline-logo">
+                    <div class="timeline-date">May 2025</div>
+                    <h3 class="timeline-title">Software Engineering Intern</h3>
+                    <p class="timeline-company">Piserve</p>
+                    <p class="timeline-description">Performed software testing and built a microservice for an e-commerce website.</p>
+                    
+                    <!-- Popup Detail -->
+                    <div class="timeline-popup">
+                        <div class="popup-header">
                             <div>
-                                <div class="timeline-date">May 2025</div>
-                                <h3 class="timeline-title">Software Engineering Intern</h3>
-                                <p class="timeline-company">Piserve</p>
+                                <h3 class="popup-title">Software Engineering Intern</h3>
+                                <p class="popup-company">Piserve</p>
+                                <p class="popup-date">May 2025</p>
                             </div>
-                            <img src="./assets/Piserve_logo.png" alt="Piserve" class="timeline-logo">
+                            <img src="./assets/Piserve_logo.png" alt="Piserve" class="popup-logo">
                         </div>
-                        <ul class="responsibilities-list">
-                            <li>Conducted comprehensive software testing and quality assurance</li>
-                            <li>Built scalable microservice architecture for e-commerce platform</li>
-                            <li>Optimized API performance and reduced response time by 40%</li>
-                            <li>Collaborated with development team using Agile methodologies</li>
-                        </ul>
+                        <div class="popup-content">
+                            <h4>Key Responsibilities:</h4>
+                            <ul class="responsibilities-list">
+                                <li>Conducted comprehensive software testing and quality assurance</li>
+                                <li>Built scalable microservice architecture for e-commerce platform</li>
+                                <li>Optimized API performance and reduced response time by 40%</li>
+                                <li>Collaborated with development team using Agile methodologies</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <div class="timeline-basic">
-                        <div class="timeline-date">Jun 2023 - Aug 2023</div>
-                        <h3 class="timeline-title">Content & SEO Intern</h3>
-                        <p class="timeline-company">Wizycom Nurture</p>
-                        <p class="timeline-description">Worked on search engine optimization and content creation...</p>
-                    </div>
-                    <div class="timeline-detailed">
-                        <div class="detailed-header">
+                    <img src="./assets/Wizycom_Nurture_logo.png" alt="Wizycom" class="timeline-logo">
+                    <div class="timeline-date">Jun 2023 - Aug 2023</div>
+                    <h3 class="timeline-title">Content & SEO Intern</h3>
+                    <p class="timeline-company">Wizycom Nurture</p>
+                    <p class="timeline-description">Worked on search engine optimization and content creation.</p>
+                    
+                    <!-- Popup Detail -->
+                    <div class="timeline-popup">
+                        <div class="popup-header">
                             <div>
-                                <div class="timeline-date">Jun 2023 - Aug 2023</div>
-                                <h3 class="timeline-title">Content & SEO Intern</h3>
-                                <p class="timeline-company">Wizycom Nurture</p>
+                                <h3 class="popup-title">Content & SEO Intern</h3>
+                                <p class="popup-company">Wizycom Nurture</p>
+                                <p class="popup-date">Jun 2023 - Aug 2023</p>
                             </div>
-                            <img src="./assets/Wizycom_Nurture_logo.png" alt="Wizycom" class="timeline-logo">
+                            <img src="./assets/Wizycom_Nurture_logo.png" alt="Wizycom" class="popup-logo">
                         </div>
-                        <ul class="responsibilities-list">
-                            <li>Improved website SEO ranking through keyword optimization</li>
-                            <li>Created engaging content for digital marketing campaigns</li>
-                            <li>Analyzed website traffic and user engagement metrics</li>
-                            <li>Implemented on-page SEO strategies increasing organic traffic</li>
-                        </ul>
+                        <div class="popup-content">
+                            <h4>Key Responsibilities:</h4>
+                            <ul class="responsibilities-list">
+                                <li>Improved website SEO ranking through keyword optimization</li>
+                                <li>Created engaging content for digital marketing campaigns</li>
+                                <li>Analyzed website traffic and user engagement metrics</li>
+                                <li>Implemented on-page SEO strategies increasing organic traffic</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -232,9 +303,18 @@
                     <h3 class="project-title">Inventory Management</h3>
                     <p class="project-description">A comprehensive inventory management system with real-time tracking, automated alerts, and detailed analytics for businesses.</p>
                     <div class="project-tags">
-                        <span class="tag">🐍 Python</span>
-                        <span class="tag">🖼️ Tkinter</span>
-                        <span class="tag">💾 MySQL</span>
+                        <span class="tag">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="tag-icon">
+                            Python
+                        </span>
+                        <span class="tag">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Tkinter" class="tag-icon">
+                            Tkinter
+                        </span>
+                        <span class="tag">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" class="tag-icon">
+                            MySQL
+                        </span>
                     </div>
                     <div class="project-links">
                         <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/justvarma/Inventory_managment'">GitHub</button>
@@ -251,9 +331,18 @@
                     <h3 class="project-title">Fatigue Detection System</h3>
                     <p class="project-description">AI-powered system using computer vision to detect driver fatigue and drowsiness, enhancing road safety through real-time alerts.</p>
                     <div class="project-tags">
-                        <span class="tag">🐍 Python</span>
-                        <span class="tag">📦 TensorFlow</span>
-                        <span class="tag">🔬 Scikit-learn</span>
+                        <span class="tag">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="tag-icon">
+                            Python
+                        </span>
+                        <span class="tag">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TensorFlow" class="tag-icon">
+                            TensorFlow
+                        </span>
+                        <span class="tag">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Scikit-learn" class="tag-icon">
+                            Scikit-learn
+                        </span>
                     </div>
                     <div class="project-links">
                         <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/justvarma/Fatigue_Detection'">GitHub</button>
@@ -270,9 +359,18 @@
                     <h3 class="project-title">Self Finance Dashboard</h3>
                     <p class="project-description">Personal finance tracking dashboard with expense categorization, budget planning, and financial insights visualization.</p>
                     <div class="project-tags">
-                        <span class="tag">🐍 Python</span>
-                        <span class="tag">📊 Streamlit</span>
-                        <span class="tag">🤖 PyTorch</span>
+                        <span class="tag">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="tag-icon">
+                            Python
+                        </span>
+                        <span class="tag">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Streamlit" class="tag-icon">
+                            Streamlit
+                        </span>
+                        <span class="tag">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="PyTorch" class="tag-icon">
+                            PyTorch
+                        </span>
                     </div>
                     <div class="project-links">
                         <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/justvarma/Inventory_managment'">GitHub</button>
@@ -318,7 +416,6 @@
             <div class="nav-links-container">
                 <ul class="nav-links">
                     <li><a href="#about">About</a></li>
-                    <li><a href="#skills">Tech Stack</a></li>
                     <li><a href="#experience">Experience</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#contact">Contact</a></li>

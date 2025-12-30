@@ -668,8 +668,10 @@ section.visible {
     border-color: var(--accent-color);
 }
 
-.tech-icon {
-    font-size: 3rem;
+.tech-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
 }
 
 .tech-name {
@@ -678,7 +680,7 @@ section.visible {
     font-weight: 500;
 }
 
-/* ===== EXPERIENCE SECTION - ENHANCED WITH DETAILED VIEW ===== */
+/* ===== EXPERIENCE SECTION - POPUP DESIGN ===== */
 #experience {
     position: relative;
 }
@@ -713,7 +715,7 @@ section.visible {
     width: 45%;
     position: relative;
     transition: all 0.3s ease;
-    overflow: hidden;
+    cursor: pointer;
 }
 
 .timeline-item:nth-child(odd) .timeline-content {
@@ -721,20 +723,17 @@ section.visible {
 }
 
 .timeline-content:hover {
-    transform: scale(1.05);
-    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.2);
+    transform: scale(1.03);
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
     border-color: var(--accent-color);
 }
 
-.timeline-basic {
-    position: relative;
-    z-index: 2;
-    transition: opacity 0.3s ease;
-}
-
-.timeline-content:hover .timeline-basic {
-    opacity: 0;
-    pointer-events: none;
+.timeline-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
 
 .timeline-date {
@@ -760,47 +759,108 @@ section.visible {
 .timeline-description {
     color: var(--secondary-color-2);
     line-height: 1.6;
+    font-size: 0.95rem;
 }
 
-.timeline-detailed {
-    position: absolute;
+/* Popup Window */
+.timeline-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: var(--primary-color);
+    border: 3px solid var(--accent-color);
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    min-width: 500px;
+    max-width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.timeline-popup.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup-overlay {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--primary-color-2);
-    padding: 2rem;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
     opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s ease;
     pointer-events: none;
-    z-index: 3;
+    transition: opacity 0.3s ease;
 }
 
-.timeline-content:hover .timeline-detailed {
+.popup-overlay.active {
     opacity: 1;
-    transform: translateY(0);
     pointer-events: all;
 }
 
-.detailed-header {
+.popup-header {
     display: flex;
     justify-content: space-between;
     align-items: start;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--container-border);
+}
+
+.popup-title {
+    color: var(--secondary-color);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.popup-company {
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.popup-date {
+    color: var(--secondary-color-2);
+    font-size: 0.9rem;
+}
+
+.popup-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+}
+
+.popup-content h4 {
+    color: var(--secondary-color);
+    font-size: 1.2rem;
     margin-bottom: 1rem;
 }
 
 .responsibilities-list {
     list-style: none;
-    margin: 1rem 0;
+    margin: 0;
+    padding: 0;
 }
 
 .responsibilities-list li {
     color: var(--secondary-color-2);
-    margin-bottom: 0.5rem;
-    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+    padding-left: 2rem;
     position: relative;
     line-height: 1.6;
+    font-size: 1rem;
 }
 
 .responsibilities-list li::before {
@@ -808,13 +868,8 @@ section.visible {
     position: absolute;
     left: 0;
     color: var(--accent-color);
-    font-size: 1.2rem;
-}
-
-.timeline-logo {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
 /* ===== PROJECTS SECTION - ENHANCED STACK DISPLAY ===== */
@@ -899,6 +954,16 @@ section.visible {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tag-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
 }
 
 .tag::before {

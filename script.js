@@ -382,4 +382,73 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         setLightMode(false);
     }
+    
+    // Initialize Experience Popups
+    initializeExperiencePopups();
 });
+
+// ===== EXPERIENCE POPUP FUNCTIONALITY =====
+function initializeExperiencePopups() {
+    // Create overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'popup-overlay';
+    document.body.appendChild(overlay);
+    
+    // Get all timeline items
+    const timelineItems = document.querySelectorAll('.timeline-content');
+    
+    timelineItems.forEach((item, index) => {
+        const popup = item.querySelector('.timeline-popup');
+        
+        // Click to open popup
+        item.addEventListener('click', function(e) {
+            // Prevent opening if clicking on a link inside
+            if (e.target.tagName === 'A') return;
+            
+            // Close any open popups first
+            document.querySelectorAll('.timeline-popup.active').forEach(p => {
+                if (p !== popup) {
+                    p.classList.remove('active');
+                }
+            });
+            
+            // Toggle current popup
+            popup.classList.toggle('active');
+            overlay.classList.toggle('active', popup.classList.contains('active'));
+            
+            // Prevent body scroll when popup is open
+            if (popup.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+    });
+    
+    // Close popup when clicking overlay
+    overlay.addEventListener('click', function() {
+        document.querySelectorAll('.timeline-popup.active').forEach(popup => {
+            popup.classList.remove('active');
+        });
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    
+    // Close popup with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.timeline-popup.active').forEach(popup => {
+                popup.classList.remove('active');
+            });
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // Prevent popup from closing when clicking inside it
+    document.querySelectorAll('.timeline-popup').forEach(popup => {
+        popup.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    });
+}
