@@ -1,3 +1,36 @@
+// ===== CUSTOM CURSOR =====
+const cursor = document.querySelector('.custom-cursor');
+const cursorDot = document.querySelector('.cursor-dot');
+
+document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    cursorDot.style.left = e.clientX + 'px';
+    cursorDot.style.top = e.clientY + 'px';
+});
+
+document.addEventListener('mousedown', () => {
+    cursor.classList.add('click');
+    setTimeout(() => cursor.classList.remove('click'), 300);
+});
+
+// Cursor hover effects on interactive elements
+const interactiveElements = document.querySelectorAll('a, button, .icon, .project-card, .tech-item, .timeline-content, .contact-info-container');
+interactiveElements.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+        cursor.style.width = '40px';
+        cursor.style.height = '40px';
+        cursor.style.borderColor = 'var(--accent-color)';
+        cursor.style.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+    });
+    el.addEventListener('mouseleave', () => {
+        cursor.style.width = '20px';
+        cursor.style.height = '20px';
+        cursor.style.borderColor = 'var(--accent-color)';
+        cursor.style.backgroundColor = 'transparent';
+    });
+});
+
 // ===== HAMBURGER MENU =====
 function toggleMenu() {
     const menu = document.querySelector(".menu-links");
@@ -278,65 +311,15 @@ if (scrollIndicator) {
     });
 }
 
-// ===== SKILL PROGRESS ANIMATION =====
-const skillObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const progressBars = entry.target.querySelectorAll('.skill-progress');
-            progressBars.forEach(bar => {
-                const progress = bar.getAttribute('data-progress');
-                setTimeout(() => {
-                    bar.style.width = progress + '%';
-                }, 100);
-            });
-            
-            // Unobserve after animation to prevent re-triggering
-            skillObserver.unobserve(entry.target);
-        }
+// ===== BUTTON CLICK EFFECTS =====
+document.querySelectorAll('.btn, .project-btn').forEach(button => {
+    button.addEventListener('mousedown', function() {
+        this.style.transform = 'scale(0.95)';
     });
-}, { threshold: 0.5 });
-
-// Observe skill categories
-document.querySelectorAll('.skill-category').forEach(category => {
-    skillObserver.observe(category);
-});
-
-// ===== STATS COUNTER ANIMATION =====
-function animateCounter(element, target) {
-    let current = 0;
-    const increment = target / 50;
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            element.textContent = target;
-            clearInterval(timer);
-        } else {
-            element.textContent = Math.floor(current);
-        }
-    }, 30);
-}
-
-const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const statNumber = entry.target.querySelector('.stat-number');
-            const targetText = statNumber.textContent;
-            
-            // Only animate if it's a number
-            if (!isNaN(parseInt(targetText))) {
-                const target = parseInt(targetText);
-                animateCounter(statNumber, target);
-            }
-            
-            // Unobserve after animation
-            statsObserver.unobserve(entry.target);
-        }
+    
+    button.addEventListener('mouseup', function() {
+        this.style.transform = '';
     });
-}, { threshold: 0.5 });
-
-// Observe stat cards
-document.querySelectorAll('.stat-card').forEach(card => {
-    statsObserver.observe(card);
 });
 
 // ===== PROJECT CARD INTERACTIONS =====
@@ -347,6 +330,14 @@ document.querySelectorAll('.project-card').forEach(card => {
     
     card.addEventListener('mouseleave', function() {
         this.style.transform = 'translateY(0)';
+    });
+    
+    card.addEventListener('mousedown', function() {
+        this.style.transform = 'translateY(-8px) scale(0.98)';
+    });
+    
+    card.addEventListener('mouseup', function() {
+        this.style.transform = 'translateY(-10px)';
     });
 });
 
@@ -392,25 +383,3 @@ document.addEventListener('DOMContentLoaded', function() {
         setLightMode(false);
     }
 });
-
-//document.addEventListener("DOMContentLoaded", function () {
-//    fetch("https://github.com/users/justvarma/contributions")
-//        .then(r => r.text())
-//        .then(html => {
-//            const parser = new DOMParser();
-//            const doc = parser.parseFromString(html, "text/html");
-//
-//            const cells = doc.querySelectorAll("rect[data-count]");
-//            let total = 0;
-//
-//          cells.forEach(cell => {
-//                total += parseInt(cell.getAttribute("data-count"));
-//            });
-//
-//            document.getElementById("githubCommits").innerText = total + "+";
-//        })
-//        .catch(err => {
-//            document.getElementById("githubCommits").innerText = "N/A";
-//            console.error(err);
-//        });
-//});
