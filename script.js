@@ -389,10 +389,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ===== EXPERIENCE POPUP FUNCTIONALITY =====
 function initializeExperiencePopups() {
-    // Create overlay
+    // Remove any existing overlays first
+    const existingOverlays = document.querySelectorAll('.popup-overlay');
+    existingOverlays.forEach(o => o.remove());
+    
+    // Create NEW overlay and append to body
     const overlay = document.createElement('div');
     overlay.className = 'popup-overlay';
+    overlay.style.zIndex = '9998';
     document.body.appendChild(overlay);
+    
+    console.log('Overlay created with z-index:', overlay.style.zIndex);
     
     // Get all timeline items
     const timelineItems = document.querySelectorAll('.timeline-content');
@@ -407,7 +414,9 @@ function initializeExperiencePopups() {
             return;
         }
         
-        console.log('Popup found for item', index);
+        // Force popup z-index
+        popup.style.zIndex = '9999';
+        console.log('Popup found for item', index, 'with z-index:', popup.style.zIndex);
         
         // Click to open popup
         item.addEventListener('click', function(e) {
@@ -429,6 +438,8 @@ function initializeExperiencePopups() {
             overlay.classList.toggle('active', popup.classList.contains('active'));
             
             console.log('Popup active:', !isActive);
+            console.log('Popup z-index when active:', window.getComputedStyle(popup).zIndex);
+            console.log('Overlay z-index when active:', window.getComputedStyle(overlay).zIndex);
             
             // Prevent body scroll when popup is open
             if (popup.classList.contains('active')) {
