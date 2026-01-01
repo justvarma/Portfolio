@@ -33,6 +33,11 @@
     }
     section {
         margin: 0 5%;
+        padding-top: 5rem;
+        padding-bottom: 2rem;
+    }
+    .section-title {
+        margin-bottom: 2rem;
     }
     .section__pic-container {
         width: 275px;
@@ -50,6 +55,9 @@
         width: 300px;
         height: 400px;
         margin: 0 auto;
+    }
+    .about-text-content {
+        padding: 2rem;
     }
     
     /* Timeline responsive */
@@ -194,7 +202,7 @@
         line-height: 1.5;
     }
     
-    /* Popup mobile - IMPROVED */
+    /* Popup mobile - IMPROVED VISIBILITY */
     .timeline-popup {
         min-width: 90vw;
         max-width: 90vw;
@@ -202,12 +210,22 @@
         padding: 1.75rem;
         max-height: 85vh;
         border-radius: 1rem;
-        border-width: 2px;
+        border-width: 3px;
         left: 50%;
         top: 50%;
         right: auto;
         bottom: auto;
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6), 
+                    0 0 0 2px var(--accent-color);
     }
+    
+    [theme="dark"] .timeline-popup {
+        background: rgba(30, 30, 30, 0.98);
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9), 
+                    0 0 0 3px var(--accent-color);
+    }
+    
     .popup-header {
         flex-direction: column;
         gap: 1rem;
@@ -222,18 +240,22 @@
     .popup-title {
         font-size: 1.4rem;
         text-align: center;
+        font-weight: 700;
     }
     .popup-company {
         font-size: 1.1rem;
         text-align: center;
+        font-weight: 700;
     }
     .popup-date {
         font-size: 0.9rem;
         text-align: center;
+        font-weight: 600;
     }
     .popup-content h4 {
         font-size: 1.15rem;
         margin-bottom: 1rem;
+        font-weight: 700;
     }
     .responsibilities-list {
         padding: 0;
@@ -243,6 +265,8 @@
         padding-left: 1.75rem;
         margin-bottom: 1rem;
         line-height: 1.6;
+        font-weight: 500;
+        color: var(--secondary-color);
     }
     .responsibilities-list li::before {
         font-size: 1.4rem;
