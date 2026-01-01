@@ -397,13 +397,24 @@ function initializeExperiencePopups() {
     // Get all timeline items
     const timelineItems = document.querySelectorAll('.timeline-content');
     
+    console.log('Found timeline items:', timelineItems.length);
+    
     timelineItems.forEach((item, index) => {
         const popup = item.querySelector('.timeline-popup');
+        
+        if (!popup) {
+            console.warn('No popup found for timeline item', index);
+            return;
+        }
+        
+        console.log('Popup found for item', index);
         
         // Click to open popup
         item.addEventListener('click', function(e) {
             // Prevent opening if clicking on a link inside
             if (e.target.tagName === 'A') return;
+            
+            console.log('Timeline item clicked:', index);
             
             // Close any open popups first
             document.querySelectorAll('.timeline-popup.active').forEach(p => {
@@ -413,8 +424,11 @@ function initializeExperiencePopups() {
             });
             
             // Toggle current popup
+            const isActive = popup.classList.contains('active');
             popup.classList.toggle('active');
             overlay.classList.toggle('active', popup.classList.contains('active'));
+            
+            console.log('Popup active:', !isActive);
             
             // Prevent body scroll when popup is open
             if (popup.classList.contains('active')) {
@@ -427,6 +441,7 @@ function initializeExperiencePopups() {
     
     // Close popup when clicking overlay
     overlay.addEventListener('click', function() {
+        console.log('Overlay clicked - closing popups');
         document.querySelectorAll('.timeline-popup.active').forEach(popup => {
             popup.classList.remove('active');
         });
@@ -437,6 +452,7 @@ function initializeExperiencePopups() {
     // Close popup with Escape key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
+            console.log('Escape pressed - closing popups');
             document.querySelectorAll('.timeline-popup.active').forEach(popup => {
                 popup.classList.remove('active');
             });
@@ -449,6 +465,7 @@ function initializeExperiencePopups() {
     document.querySelectorAll('.timeline-popup').forEach(popup => {
         popup.addEventListener('click', function(e) {
             e.stopPropagation();
+            console.log('Clicked inside popup - preventing close');
         });
     });
 }

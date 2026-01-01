@@ -73,8 +73,14 @@
     
     /* Popup responsive */
     .timeline-popup {
-        min-width: 85%;
+        min-width: 90%;
+        max-width: 95%;
         padding: 2rem;
+        max-height: 85vh;
+    }
+    .popup-header {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
     }
 }
 
@@ -146,6 +152,7 @@
     }
     .about-text-content p {
         font-size: 1rem;
+        line-height: 1.7;
     }
     
     /* Tech stack mobile */
@@ -183,33 +190,62 @@
         font-size: 0.9rem;
     }
     .timeline-description {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
+        line-height: 1.5;
     }
     
-    /* Popup mobile */
+    /* Popup mobile - IMPROVED */
     .timeline-popup {
-        min-width: 95%;
-        padding: 1.5rem;
+        min-width: 90vw;
+        max-width: 90vw;
+        width: 90vw;
+        padding: 1.75rem;
         max-height: 85vh;
+        border-radius: 1rem;
+        border-width: 2px;
+        left: 50%;
+        top: 50%;
+        right: auto;
+        bottom: auto;
     }
     .popup-header {
         flex-direction: column;
         gap: 1rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
     }
     .popup-logo {
-        width: 60px;
-        height: 60px;
-        align-self: flex-start;
+        width: 70px;
+        height: 70px;
+        align-self: center;
     }
     .popup-title {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
+        text-align: center;
     }
     .popup-company {
-        font-size: 1rem;
+        font-size: 1.1rem;
+        text-align: center;
+    }
+    .popup-date {
+        font-size: 0.9rem;
+        text-align: center;
+    }
+    .popup-content h4 {
+        font-size: 1.15rem;
+        margin-bottom: 1rem;
+    }
+    .responsibilities-list {
+        padding: 0;
     }
     .responsibilities-list li {
-        font-size: 0.9rem;
-        padding-left: 1.5rem;
+        font-size: 1rem;
+        padding-left: 1.75rem;
+        margin-bottom: 1rem;
+        line-height: 1.6;
+    }
+    .responsibilities-list li::before {
+        font-size: 1.4rem;
     }
     
     /* Projects mobile */
@@ -223,7 +259,7 @@
         gap: 0.5rem;
     }
     .tag {
-        font-size: 0.7rem;
+        font-size: 0.75rem;
         padding: 0.4rem 0.8rem;
     }
     .tag-icon {
@@ -296,10 +332,22 @@
         height: 40px;
     }
     .timeline-popup {
-        padding: 1rem;
+        min-width: 95%;
+        width: 95%;
+        padding: 1.25rem;
+        border-radius: 0.75rem;
     }
     .popup-title {
-        font-size: 1.1rem;
+        font-size: 1.15rem;
+    }
+    .popup-company {
+        font-size: 0.95rem;
+    }
+    .popup-content h4 {
+        font-size: 1rem;
+    }
+    .responsibilities-list li {
+        font-size: 0.9rem;
     }
 }
 
