@@ -145,6 +145,9 @@
     .section__text .title {
         font-size: 2.5rem;
     }
+    .name-text {
+        font-size: 2.5rem;
+    }
     .typing-text {
         font-size: 1.3rem;
     }

@@ -49,7 +49,7 @@ body {
 }
 
 html {
-    scroll-behavior: smooth;
+    /* Removed scroll-behavior: smooth - Lenis handles this */
 }
 
 h3 {
@@ -469,6 +469,29 @@ section.visible {
 .section__text .title {
     font-size: 3.5rem;
     margin-bottom: 0.5rem;
+    perspective: 1000px;
+}
+
+.name-wrapper {
+    display: inline-block;
+    perspective: 1000px;
+}
+
+.name-text {
+    display: inline-block;
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+
+.name-text:hover {
+    transform: rotateY(15deg) rotateX(10deg) scale(1.05);
+    filter: drop-shadow(0 10px 30px rgba(59, 130, 246, 0.5));
 }
 
 /* Typing Animation */

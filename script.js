@@ -1,3 +1,82 @@
+// ===== LENIS SMOOTH SCROLL INITIALIZATION =====
+const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    direction: 'vertical',
+    gestureDirection: 'vertical',
+    smooth: true,
+    mouseMultiplier: 1,
+    smoothTouch: false,
+    touchMultiplier: 2,
+    infinite: false,
+});
+
+// Lenis animation frame
+function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+}
+
+requestAnimationFrame(raf);
+
+// Sync Lenis with anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const target = document.querySelector(targetId);
+        
+        if (target) {
+            lenis.scrollTo(target, {
+                offset: -100,
+                duration: 1.5,
+            });
+        }
+    });
+});
+
+// ===== 3D NAME ROTATION ON SCROLL =====
+const nameText = document.querySelector('.name-text');
+let ticking = false;
+
+lenis.on('scroll', ({ scroll }) => {
+    if (!ticking && nameText) {
+        window.requestAnimationFrame(() => {
+            // Calculate rotation based on scroll position
+            const scrollProgress = Math.min(scroll / 500, 1); // Max at 500px scroll
+            const rotateY = scrollProgress * 360; // Full rotation
+            const rotateX = Math.sin(scrollProgress * Math.PI * 2) * 20; // Wave effect
+            const scale = 1 + (Math.sin(scrollProgress * Math.PI) * 0.1); // Subtle scale
+            
+            nameText.style.transform = `
+                rotateY(${rotateY}deg) 
+                rotateX(${rotateX}deg) 
+                scale(${scale})
+            `;
+            
+            ticking = false;
+        });
+        ticking = true;
+    }
+});
+
+// Mouse movement parallax effect on name
+if (nameText) {
+    document.addEventListener('mousemove', (e) => {
+        const { clientX, clientY } = e;
+        const { innerWidth, innerHeight } = window;
+        
+        // Calculate rotation based on mouse position
+        const rotateY = ((clientX / innerWidth) - 0.5) * 30; // -15 to 15 degrees
+        const rotateX = ((clientY / innerHeight) - 0.5) * -30; // -15 to 15 degrees
+        
+        nameText.style.transform = `
+            rotateY(${rotateY}deg) 
+            rotateX(${rotateX}deg)
+        `;
+    });
+}
+
 // ===== CUSTOM CURSOR =====
 const cursor = document.querySelector('.custom-cursor');
 const cursorDot = document.querySelector('.cursor-dot');
@@ -58,10 +137,8 @@ function initializeAnimations() {
 }
 
 // ===== PROGRESS BAR =====
-window.addEventListener('scroll', () => {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
+lenis.on('scroll', ({ scroll, limit, velocity, direction, progress }) => {
+    const scrolled = progress * 100;
     document.getElementById('progressBar').style.width = scrolled + '%';
 });
 
@@ -142,7 +219,7 @@ document.querySelectorAll('section').forEach(section => {
 });
 
 // ===== ACTIVE NAVIGATION LINK =====
-window.addEventListener('scroll', () => {
+lenis.on('scroll', ({ scroll }) => {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-link');
     
@@ -150,7 +227,7 @@ window.addEventListener('scroll', () => {
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
-        if (pageYOffset >= (sectionTop - 200)) {
+        if (scroll >= (sectionTop - 200)) {
             current = section.getAttribute('id');
         }
     });
@@ -282,20 +359,7 @@ function setLightMode(animate = true) {
 }
 
 // ===== SMOOTH SCROLL =====
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        const target = document.querySelector(targetId);
-        
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
+// Already handled by Lenis above with anchor links
 
 // Scroll indicator click
 const scrollIndicator = document.querySelector('.scroll-indicator');
@@ -303,9 +367,9 @@ if (scrollIndicator) {
     scrollIndicator.addEventListener('click', function() {
         const aboutSection = document.querySelector('#about');
         if (aboutSection) {
-            aboutSection.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+            lenis.scrollTo(aboutSection, {
+                offset: -100,
+                duration: 1.5,
             });
         }
     });
@@ -352,8 +416,8 @@ let lastScroll = 0;
 const nav = document.querySelector('#desktop-nav');
 const hamburgerNav = document.querySelector('#hamburger-nav');
 
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
+lenis.on('scroll', ({ scroll }) => {
+    const currentScroll = scroll;
     
     if (currentScroll <= 0) {
         if (nav) nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
@@ -444,8 +508,10 @@ function initializeExperiencePopups() {
             // Prevent body scroll when popup is open
             if (popup.classList.contains('active')) {
                 document.body.style.overflow = 'hidden';
+                lenis.stop(); // Stop Lenis scroll
             } else {
                 document.body.style.overflow = '';
+                lenis.start(); // Resume Lenis scroll
             }
         });
     });
@@ -458,6 +524,7 @@ function initializeExperiencePopups() {
         });
         overlay.classList.remove('active');
         document.body.style.overflow = '';
+        lenis.start(); // Resume Lenis scroll
     });
     
     // Close popup with Escape key
@@ -469,6 +536,7 @@ function initializeExperiencePopups() {
             });
             overlay.classList.remove('active');
             document.body.style.overflow = '';
+            lenis.start(); // Resume Lenis scroll
         }
     });
     
