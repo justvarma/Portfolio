@@ -19,6 +19,133 @@ function raf(time) {
 
 requestAnimationFrame(raf);
 
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
+
+// Update ScrollTrigger on Lenis scroll
+lenis.on('scroll', ScrollTrigger.update);
+
+// Sync GSAP with Lenis
+gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+});
+
+gsap.ticker.lagSmoothing(0);
+
+// ===== PARALLAX SCROLLING =====
+gsap.utils.toArray('[data-speed]').forEach(element => {
+    const speed = parseFloat(element.getAttribute('data-speed'));
+    gsap.to(element, {
+        y: (i, target) => (1 - speed) * ScrollTrigger.maxScroll(window) * -1,
+        ease: 'none',
+        scrollTrigger: {
+            start: 0,
+            end: 'max',
+            invalidateOnRefresh: true,
+            scrub: 0.5
+        }
+    });
+});
+
+// ===== REVEAL ANIMATIONS =====
+gsap.utils.toArray('.reveal-up').forEach((element, index) => {
+    gsap.from(element, {
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+            trigger: element,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse'
+        },
+        onComplete: () => element.classList.add('revealed')
+    });
+});
+
+gsap.utils.toArray('.reveal-text').forEach(element => {
+    gsap.from(element, {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+        scrollTrigger: {
+            trigger: element,
+            start: 'top 90%',
+            toggleActions: 'play none none reverse'
+        },
+        onComplete: () => element.classList.add('revealed')
+    });
+});
+
+// ===== SPLIT TEXT ANIMATION =====
+function splitText() {
+    const titles = document.querySelectorAll('.split-text');
+    titles.forEach(title => {
+        const text = title.textContent;
+        title.innerHTML = '';
+        text.split('').forEach((char, index) => {
+            const span = document.createElement('span');
+            span.className = 'char';
+            span.textContent = char === ' ' ? '\u00A0' : char;
+            span.style.transitionDelay = `${index * 0.03}s`;
+            title.appendChild(span);
+        });
+    });
+}
+
+splitText();
+
+// Trigger split text animation
+gsap.utils.toArray('.split-text').forEach(element => {
+    ScrollTrigger.create({
+        trigger: element,
+        start: 'top 85%',
+        onEnter: () => element.classList.add('revealed')
+    });
+});
+
+// ===== TILT CARD EFFECT =====
+document.querySelectorAll('.tilt-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = ((y - centerY) / centerY) * -10; // Max 10 degrees
+        const rotateY = ((x - centerX) / centerX) * 10;
+        
+        card.style.setProperty('--rx', `${rotateX}deg`);
+        card.style.setProperty('--ry', `${rotateY}deg`);
+    });
+    
+    card.addEventListener('mouseleave', () => {
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
+    });
+});
+
+// ===== MAGNETIC BUTTON EFFECT =====
+document.querySelectorAll('.magnetic-btn, .magnetic-icon').forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        const strength = 0.3; // Magnetic strength
+        btn.style.setProperty('--mx', `${x * strength}px`);
+        btn.style.setProperty('--my', `${y * strength}px`);
+    });
+    
+    btn.addEventListener('mouseleave', () => {
+        btn.style.setProperty('--mx', '0px');
+        btn.style.setProperty('--my', '0px');
+    });
+});
+
 // Sync Lenis with anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {

@@ -9,6 +9,9 @@
     <link rel="icon" type="image/png" href="./assets/icon_final_2.png">
     <!-- Lenis Smooth Scroll -->
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <!-- GSAP for advanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
     <!-- Custom Cursor -->
@@ -52,40 +55,40 @@
 
     <section id="profile">
         <div class="particles" id="particles"></div>
-        <div class="section__pic-container">
+        <div class="section__pic-container" data-speed="0.8">
             <img src="./assets/profile-pic-1.png" alt="Aditya Varma profile picture">
         </div>
-        <div class="section__text">
+        <div class="section__text" data-speed="0.9">
             <p class="section_text_p1">Hello, I'm</p>
             <h1 class="title"><span class="name-wrapper"><span class="name-text">Aditya Varma</span></span></h1>
             <div class="typing-text">
                 <span id="typingText"></span><span class="cursor"></span>
             </div>
             <div class="btn-container">
-                <button class="btn btn-color-1" onclick="window.open('./assets/Aditya_Varma_Resume.pdf')">Download CV</button>
-                <button class="btn btn-color-1" onclick="location.href='./#contact'">Contact Info</button>
+                <button class="btn btn-color-1 magnetic-btn" onclick="window.open('./assets/Aditya_Varma_Resume.pdf')">Download CV</button>
+                <button class="btn btn-color-1 magnetic-btn" onclick="location.href='./#contact'">Contact Info</button>
             </div>
             <div id="socials-container">
-                <img src="./assets/linkedin.png" src-light="./assets/linkedin_light.png" src-dark="./assets/linkedin_dark.png" alt="My LinkedIn Profile" class="icon linkedin-icon" onclick="location.href='https://www.linkedin.com/in/aditya-varma-52a6b7271/'">
-                <img src="./assets/github.png" src-light="./assets/github_light.png" src-dark="./assets/github_dark.png" alt="My GitHub Profile" class="icon github-icon" onclick="location.href='https://github.com/justvarma'">
+                <img src="./assets/linkedin.png" src-light="./assets/linkedin_light.png" src-dark="./assets/linkedin_dark.png" alt="My LinkedIn Profile" class="icon linkedin-icon magnetic-icon" onclick="location.href='https://www.linkedin.com/in/aditya-varma-52a6b7271/'">
+                <img src="./assets/github.png" src-light="./assets/github_light.png" src-dark="./assets/github_dark.png" alt="My GitHub Profile" class="icon github-icon magnetic-icon" onclick="location.href='https://github.com/justvarma'">
             </div>
         </div>
-        <div class="scroll-indicator">
+        <div class="scroll-indicator" data-speed="1.2">
             <img src="./assets/arrow.png" src-light="./assets/arrow_light.png" src-dark="./assets/arrow_dark.png" alt="Arrow icon" class="icon arrow">
         </div>
     </section>
 
     <section id="about">
-        <div class="section-title">
+        <div class="section-title reveal-text">
             <p class="section_text_p1">Get To Know More</p>
-            <h1 class="title">About Me</h1>
+            <h1 class="title split-text">About Me</h1>
         </div>
         
         <div class="about-content">
-            <div class="about-image-container">
-                <img src="./assets/profile-pic-1.png" alt="Aditya Varma">
+            <div class="about-image-container tilt-card" data-speed="0.95">
+                <img src="./assets/about-pic-1.jpg" alt="Aditya Varma">
             </div>
-            <div class="about-text-content">
+            <div class="about-text-content reveal-up" data-speed="1.05">
                 <h2>Who Am I?</h2>
                 <p>As a regular human being, I love traveling, playing football, and indulging in good food. Exploring different cultures and experiences keeps life exciting and fuels my creativity.</p>
                 <p>As a student and tech enthusiast, I enjoy exploring new domains, solving complex problems, and building real-world solutions—all powered by my tiny goldfish brain and an unlimited curiosity for learning.</p>
@@ -291,13 +294,13 @@
     </section>
 
     <section id="projects">
-        <div class="section-title">
+        <div class="section-title reveal-text">
             <p class="section_text_p1">Browse My Recent</p>
-            <h1 class="title">Projects</h1>
+            <h1 class="title split-text">Projects</h1>
         </div>
         
         <div class="projects-grid">
-            <div class="project-card">
+            <div class="project-card tilt-card reveal-up">
                 <div class="project-image-container">
                     <img class="project-img" src="./assets/project-1.jpeg" alt="Inventory Management">
                 </div>
@@ -319,13 +322,13 @@
                         </span>
                     </div>
                     <div class="project-links">
-                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/justvarma/Inventory_managment'">GitHub</button>
-                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/justvarma'">Demo</button>
+                        <button class="btn btn-color-2 project-btn magnetic-btn" onclick="location.href='https://github.com/justvarma/Inventory_managment'">GitHub</button>
+                        <button class="btn btn-color-2 project-btn magnetic-btn" onclick="location.href='https://github.com/justvarma'">Demo</button>
                     </div>
                 </div>
             </div>
 
-            <div class="project-card">
+            <div class="project-card tilt-card reveal-up">
                 <div class="project-image-container">
                     <img class="project-img" src="./assets/project-2.jpeg" alt="Fatigue Detection">
                 </div>
@@ -347,13 +350,13 @@
                         </span>
                     </div>
                     <div class="project-links">
-                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/justvarma/Fatigue_Detection'">GitHub</button>
-                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/justvarma'">Demo</button>
+                        <button class="btn btn-color-2 project-btn magnetic-btn" onclick="location.href='https://github.com/justvarma/Fatigue_Detection'">GitHub</button>
+                        <button class="btn btn-color-2 project-btn magnetic-btn" onclick="location.href='https://github.com/justvarma'">Demo</button>
                     </div>
                 </div>
             </div>
 
-            <div class="project-card">
+            <div class="project-card tilt-card reveal-up">
                 <div class="project-image-container">
                     <img class="project-img" src="./assets/project-3.png" alt="Finance Dashboard">
                 </div>
@@ -375,8 +378,8 @@
                         </span>
                     </div>
                     <div class="project-links">
-                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/justvarma/Inventory_managment'">GitHub</button>
-                        <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/justvarma'">Demo</button>
+                        <button class="btn btn-color-2 project-btn magnetic-btn" onclick="location.href='https://github.com/justvarma/Inventory_managment'">GitHub</button>
+                        <button class="btn btn-color-2 project-btn magnetic-btn" onclick="location.href='https://github.com/justvarma'">Demo</button>
                     </div>
                 </div>
             </div>

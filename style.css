@@ -60,7 +60,68 @@ p {
     color: var(--secondary-color-2);
 }
 
-/* ===== CUSTOM CURSOR ===== */
+/* ===== TILT CARD EFFECT ===== */
+.tilt-card {
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease;
+    will-change: transform;
+}
+
+.tilt-card:hover {
+    transform: perspective(1000px) rotateX(var(--rx, 0)) rotateY(var(--ry, 0)) scale3d(1.02, 1.02, 1.02);
+}
+
+/* ===== MAGNETIC BUTTON EFFECT ===== */
+.magnetic-btn, .magnetic-icon {
+    position: relative;
+    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    will-change: transform;
+}
+
+.magnetic-btn:hover, .magnetic-icon:hover {
+    transform: translate(var(--mx, 0), var(--my, 0));
+}
+
+/* ===== REVEAL ANIMATIONS ===== */
+.reveal-up {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal-up.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-text {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.reveal-text.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== SPLIT TEXT ANIMATION ===== */
+.split-text {
+    display: inline-block;
+}
+
+.split-text .char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(30px) rotateX(-90deg);
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.split-text.revealed .char {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+}
+
+/* ===== ENHANCED CURSOR ===== */
 .custom-cursor {
     width: 20px;
     height: 20px;
