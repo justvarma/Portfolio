@@ -82,11 +82,12 @@ p {
     transform: translate(var(--mx, 0), var(--my, 0));
 }
 
-/* ===== REVEAL ANIMATIONS ===== */
+/* ===== REVEAL ANIMATIONS =====
+   FIX: Removed opacity:0 and transform from base classes.
+   GSAP's fromTo() now fully controls the initial hidden state via
+   inline styles, so CSS no longer conflicts with the animation target. */
 .reveal-up {
-    opacity: 0;
-    transform: translateY(60px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    /* intentionally empty — GSAP sets opacity:0 / translateY as "from" state */
 }
 
 .reveal-up.revealed {
@@ -95,8 +96,7 @@ p {
 }
 
 .reveal-text {
-    opacity: 0;
-    transform: translateY(30px);
+    /* intentionally empty — GSAP sets opacity:0 / translateY as "from" state */
 }
 
 .reveal-text.revealed {
@@ -409,7 +409,12 @@ a {
     transform: rotate(-45deg) translate(10px, -5px);
 }
 
-/* SECTIONS - REDUCED SPACING */
+/* ===== SECTIONS =====
+   FIX: Removed transform: translateY(50px/0) from section and section.visible.
+   CSS transforms on a parent create a new stacking context that traps
+   position:fixed children (like .timeline-popup), causing the popup to
+   render below the body-level overlay. Using opacity-only fade-in avoids
+   this stacking-context problem entirely. */
 section {
     padding-top: 6rem;
     padding-bottom: 3rem;
@@ -417,8 +422,7 @@ section {
     margin: 0 10rem;
     box-sizing: border-box;
     opacity: 0;
-    transform: translateY(50px);
-    transition: all 0.8s ease;
+    transition: opacity 0.8s ease;
 }
 
 #profile {
@@ -428,7 +432,6 @@ section {
 
 section.visible {
     opacity: 1;
-    transform: translateY(0);
 }
 
 .section-title {
@@ -695,19 +698,20 @@ section.visible {
 .about-content {
     display: flex;
     gap: 3rem;
-    align-items: center;
+    align-items: flex-end;
     max-width: 1200px;
     margin: 0 auto;
 }
 
 .about-image-container {
-    flex: 0 0 400px;
-    height: 500px;
+    flex: 0 0 360px;
+    height: 460px;
     border-radius: 2rem;
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(59, 130, 246, 0.2);
     transition: all 0.3s ease;
     border: 2px solid rgba(255, 255, 255, 0.1);
+    align-self: flex-end;
 }
 
 .about-image-container:hover {
@@ -917,7 +921,9 @@ section.visible {
     font-size: 0.95rem;
 }
 
-/* Popup Window - GLASSMORPHISM - HIGHLY VISIBLE */
+/* ===== POPUP WINDOW =====
+   FIX: Popups are moved to <body> by JS, so they now live in the root
+   stacking context. z-index values here are what truly matter. */
 .timeline-popup {
     position: fixed;
     top: 50%;
@@ -933,9 +939,9 @@ section.visible {
     max-width: 90%;
     max-height: 80vh;
     overflow-y: auto;
-    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 
-                0 0 0 1px rgba(255, 255, 255, 0.3),
-                inset 0 0 80px rgba(59, 130, 246, 0.1);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.3),
+    inset 0 0 80px rgba(59, 130, 246, 0.1);
     z-index: 10001;
     opacity: 0;
     visibility: hidden;
@@ -943,13 +949,12 @@ section.visible {
     transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-/* Ensure popup is visible on dark backgrounds */
 [theme="dark"] .timeline-popup {
     background: rgba(30, 30, 30, 0.98);
     border: 3px solid var(--accent-color);
-    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9), 
-                0 0 0 2px var(--accent-color),
-                inset 0 0 80px rgba(59, 130, 246, 0.15);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9),
+    0 0 0 2px var(--accent-color),
+    inset 0 0 80px rgba(59, 130, 246, 0.15);
 }
 
 .timeline-popup.active {
@@ -960,24 +965,12 @@ section.visible {
 }
 
 /* Custom scrollbar for popup */
-.timeline-popup::-webkit-scrollbar {
-    width: 10px;
-}
+.timeline-popup::-webkit-scrollbar { width: 10px; }
+.timeline-popup::-webkit-scrollbar-track { background: var(--primary-color-3); border-radius: 10px; }
+.timeline-popup::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 10px; }
+.timeline-popup::-webkit-scrollbar-thumb:hover { background: var(--secondary-color); }
 
-.timeline-popup::-webkit-scrollbar-track {
-    background: var(--primary-color-3);
-    border-radius: 10px;
-}
-
-.timeline-popup::-webkit-scrollbar-thumb {
-    background: var(--accent-color);
-    border-radius: 10px;
-}
-
-.timeline-popup::-webkit-scrollbar-thumb:hover {
-    background: var(--secondary-color);
-}
-
+/* Overlay rendered behind popup */
 .popup-overlay {
     position: fixed;
     top: 0;
@@ -1068,7 +1061,7 @@ section.visible {
     font-weight: bold;
 }
 
-/* ===== PROJECTS SECTION - ENHANCED STACK DISPLAY ===== */
+/* ===== PROJECTS SECTION ===== */
 #projects {
     position: relative;
 }

@@ -48,34 +48,44 @@ gsap.utils.toArray('[data-speed]').forEach(element => {
 });
 
 // ===== REVEAL ANIMATIONS =====
-gsap.utils.toArray('.reveal-up').forEach((element, index) => {
-    gsap.from(element, {
-        y: 100,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-            trigger: element,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse'
-        },
-        onComplete: () => element.classList.add('revealed')
-    });
+// FIX: Changed gsap.from() to gsap.fromTo() so GSAP explicitly sets both the
+// start state (opacity 0, y 100) and end state (opacity 1, y 0).
+// Previously, gsap.from() animated TO the CSS value, which was opacity:0 —
+// meaning the element stayed invisible even after "animating".
+gsap.utils.toArray('.reveal-up').forEach((element) => {
+    gsap.fromTo(element,
+        { y: 100, opacity: 0 },
+        {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: element,
+                start: 'top 85%',
+                toggleActions: 'play none none reverse'
+            },
+            onComplete: () => element.classList.add('revealed')
+        }
+    );
 });
 
 gsap.utils.toArray('.reveal-text').forEach(element => {
-    gsap.from(element, {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power2.out',
-        scrollTrigger: {
-            trigger: element,
-            start: 'top 90%',
-            toggleActions: 'play none none reverse'
-        },
-        onComplete: () => element.classList.add('revealed')
-    });
+    gsap.fromTo(element,
+        { y: 50, opacity: 0 },
+        {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: element,
+                start: 'top 90%',
+                toggleActions: 'play none none reverse'
+            },
+            onComplete: () => element.classList.add('revealed')
+        }
+    );
 });
 
 // ===== SPLIT TEXT ANIMATION =====
@@ -111,17 +121,17 @@ document.querySelectorAll('.tilt-card').forEach(card => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        
+
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        
-        const rotateX = ((y - centerY) / centerY) * -10; // Max 10 degrees
+
+        const rotateX = ((y - centerY) / centerY) * -10;
         const rotateY = ((x - centerX) / centerX) * 10;
-        
+
         card.style.setProperty('--rx', `${rotateX}deg`);
         card.style.setProperty('--ry', `${rotateY}deg`);
     });
-    
+
     card.addEventListener('mouseleave', () => {
         card.style.setProperty('--rx', '0deg');
         card.style.setProperty('--ry', '0deg');
@@ -134,12 +144,12 @@ document.querySelectorAll('.magnetic-btn, .magnetic-icon').forEach(btn => {
         const rect = btn.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
-        
-        const strength = 0.3; // Magnetic strength
+
+        const strength = 0.3;
         btn.style.setProperty('--mx', `${x * strength}px`);
         btn.style.setProperty('--my', `${y * strength}px`);
     });
-    
+
     btn.addEventListener('mouseleave', () => {
         btn.style.setProperty('--mx', '0px');
         btn.style.setProperty('--my', '0px');
@@ -152,7 +162,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const targetId = this.getAttribute('href');
         const target = document.querySelector(targetId);
-        
+
         if (target) {
             lenis.scrollTo(target, {
                 offset: -100,
@@ -169,18 +179,17 @@ let ticking = false;
 lenis.on('scroll', ({ scroll }) => {
     if (!ticking && nameText) {
         window.requestAnimationFrame(() => {
-            // Calculate rotation based on scroll position
-            const scrollProgress = Math.min(scroll / 500, 1); // Max at 500px scroll
-            const rotateY = scrollProgress * 360; // Full rotation
-            const rotateX = Math.sin(scrollProgress * Math.PI * 2) * 20; // Wave effect
-            const scale = 1 + (Math.sin(scrollProgress * Math.PI) * 0.1); // Subtle scale
-            
+            const scrollProgress = Math.min(scroll / 500, 1);
+            const rotateY = scrollProgress * 360;
+            const rotateX = Math.sin(scrollProgress * Math.PI * 2) * 20;
+            const scale = 1 + (Math.sin(scrollProgress * Math.PI) * 0.1);
+
             nameText.style.transform = `
                 rotateY(${rotateY}deg) 
                 rotateX(${rotateX}deg) 
                 scale(${scale})
             `;
-            
+
             ticking = false;
         });
         ticking = true;
@@ -192,11 +201,10 @@ if (nameText) {
     document.addEventListener('mousemove', (e) => {
         const { clientX, clientY } = e;
         const { innerWidth, innerHeight } = window;
-        
-        // Calculate rotation based on mouse position
-        const rotateY = ((clientX / innerWidth) - 0.5) * 30; // -15 to 15 degrees
-        const rotateX = ((clientY / innerHeight) - 0.5) * -30; // -15 to 15 degrees
-        
+
+        const rotateY = ((clientX / innerWidth) - 0.5) * 30;
+        const rotateX = ((clientY / innerHeight) - 0.5) * -30;
+
         nameText.style.transform = `
             rotateY(${rotateY}deg) 
             rotateX(${rotateX}deg)
@@ -250,13 +258,11 @@ window.onload = function () {
     if (performance.navigation.type === 1) {
         window.location.hash = "";
     }
-    
-    // Initialize all animations
+
     initializeAnimations();
 };
 
 function initializeAnimations() {
-    // Set first section as visible
     const firstSection = document.querySelector('section');
     if (firstSection) {
         firstSection.classList.add('visible');
@@ -281,9 +287,9 @@ const pauseTime = 2000;
 function type() {
     const currentText = texts[textIndex];
     const typingElement = document.getElementById('typingText');
-    
+
     if (!typingElement) return;
-    
+
     if (isDeleting) {
         typingElement.textContent = currentText.substring(0, charIndex - 1);
         charIndex--;
@@ -291,28 +297,27 @@ function type() {
         typingElement.textContent = currentText.substring(0, charIndex + 1);
         charIndex++;
     }
-    
+
     if (!isDeleting && charIndex === currentText.length) {
         setTimeout(() => isDeleting = true, pauseTime);
     } else if (isDeleting && charIndex === 0) {
         isDeleting = false;
         textIndex = (textIndex + 1) % texts.length;
     }
-    
+
     const speed = isDeleting ? deletingSpeed : typingSpeed;
     setTimeout(type, speed);
 }
 
-// Start typing animation
 type();
 
 // ===== PARTICLES ANIMATION =====
 function createParticles() {
     const particlesContainer = document.getElementById('particles');
     if (!particlesContainer) return;
-    
+
     const particleCount = 30;
-    
+
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
@@ -340,7 +345,6 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe all sections
 document.querySelectorAll('section').forEach(section => {
     observer.observe(section);
 });
@@ -349,16 +353,15 @@ document.querySelectorAll('section').forEach(section => {
 lenis.on('scroll', ({ scroll }) => {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-link');
-    
+
     let current = '';
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
         if (scroll >= (sectionTop - 200)) {
             current = section.getAttribute('id');
         }
     });
-    
+
     navLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href').slice(1) === current) {
@@ -378,12 +381,10 @@ const overlay = document.createElement('div');
 overlay.className = 'theme-transition-overlay';
 document.body.appendChild(overlay);
 
-// Set initial theme
 if (currentTheme === "dark") {
-    setDarkMode(false); // false = no animation on initial load
+    setDarkMode(false);
 }
 
-// Event listeners for theme toggle
 if (btn) {
     btn.addEventListener("click", function (e) {
         createWaveTransition(e, this);
@@ -397,18 +398,15 @@ if (btn2) {
 }
 
 function createWaveTransition(event, button) {
-    // Get button position
     const rect = button.getBoundingClientRect();
     const x = rect.left + rect.width / 2;
     const y = rect.top + rect.height / 2;
-    
-    // Calculate the distance to the farthest corner
+
     const maxDistance = Math.hypot(
         Math.max(x, window.innerWidth - x),
         Math.max(y, window.innerHeight - y)
     );
-    
-    // Create wave element
+
     const wave = document.createElement('div');
     wave.className = 'theme-wave';
     wave.style.width = maxDistance * 2 + 'px';
@@ -416,37 +414,33 @@ function createWaveTransition(event, button) {
     wave.style.left = x + 'px';
     wave.style.top = y + 'px';
     wave.style.transform = 'translate(-50%, -50%) scale(0)';
-    
-    // Set the wave background to the new theme color
-    let currentTheme = document.body.getAttribute("theme");
-    if (currentTheme === "dark") {
-        wave.style.background = '#ffffff'; // Light mode color
+
+    let currentThemeAttr = document.body.getAttribute("theme");
+    if (currentThemeAttr === "dark") {
+        wave.style.background = '#ffffff';
     } else {
-        wave.style.background = '#212121'; // Dark mode color
+        wave.style.background = '#212121';
     }
-    
+
     overlay.appendChild(wave);
-    
-    // Trigger animation
+
     setTimeout(() => {
         wave.classList.add('active');
     }, 10);
-    
-    // Change theme after a slight delay for smooth transition
+
     setTimeout(() => {
         setTheme();
     }, 400);
-    
-    // Remove wave after animation
+
     setTimeout(() => {
         wave.remove();
     }, 1000);
 }
 
 function setTheme() {
-    let currentTheme = document.body.getAttribute("theme");
-    
-    if (currentTheme === "dark") {
+    let currentThemeAttr = document.body.getAttribute("theme");
+
+    if (currentThemeAttr === "dark") {
         setLightMode(true);
     } else {
         setDarkMode(true);
@@ -456,37 +450,28 @@ function setTheme() {
 function setDarkMode(animate = true) {
     document.body.setAttribute("theme", "dark");
     localStorage.setItem("theme", "dark");
-    
-    // Update theme toggle icons
+
     if (btn) btn.textContent = "☀️";
     if (btn2) btn2.textContent = "☀️";
 
     themeIcons.forEach((icon) => {
         const darkSrc = icon.getAttribute("src-dark");
-        if (darkSrc) {
-            icon.src = darkSrc;
-        }
+        if (darkSrc) icon.src = darkSrc;
     });
 }
 
 function setLightMode(animate = true) {
     document.body.removeAttribute("theme");
     localStorage.setItem("theme", "light");
-    
-    // Update theme toggle icons
+
     if (btn) btn.textContent = "🌙";
     if (btn2) btn2.textContent = "🌙";
 
     themeIcons.forEach((icon) => {
         const lightSrc = icon.getAttribute("src-light");
-        if (lightSrc) {
-            icon.src = lightSrc;
-        }
+        if (lightSrc) icon.src = lightSrc;
     });
 }
-
-// ===== SMOOTH SCROLL =====
-// Already handled by Lenis above with anchor links
 
 // Scroll indicator click
 const scrollIndicator = document.querySelector('.scroll-indicator');
@@ -507,7 +492,7 @@ document.querySelectorAll('.btn, .project-btn').forEach(button => {
     button.addEventListener('mousedown', function() {
         this.style.transform = 'scale(0.95)';
     });
-    
+
     button.addEventListener('mouseup', function() {
         this.style.transform = '';
     });
@@ -518,15 +503,15 @@ document.querySelectorAll('.project-card').forEach(card => {
     card.addEventListener('mouseenter', function() {
         this.style.transform = 'translateY(-10px)';
     });
-    
+
     card.addEventListener('mouseleave', function() {
         this.style.transform = 'translateY(0)';
     });
-    
+
     card.addEventListener('mousedown', function() {
         this.style.transform = 'translateY(-8px) scale(0.98)';
     });
-    
+
     card.addEventListener('mouseup', function() {
         this.style.transform = 'translateY(-10px)';
     });
@@ -545,7 +530,7 @@ const hamburgerNav = document.querySelector('#hamburger-nav');
 
 lenis.on('scroll', ({ scroll }) => {
     const currentScroll = scroll;
-    
+
     if (currentScroll <= 0) {
         if (nav) nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
         if (hamburgerNav) hamburgerNav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
@@ -553,125 +538,104 @@ lenis.on('scroll', ({ scroll }) => {
         if (nav) nav.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
         if (hamburgerNav) hamburgerNav.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
     }
-    
+
     lastScroll = currentScroll;
 });
 
 // ===== INITIALIZE ON DOM LOAD =====
 document.addEventListener('DOMContentLoaded', function() {
-    // Add smooth fade-in to body
     document.body.style.opacity = '0';
     setTimeout(() => {
         document.body.style.transition = 'opacity 0.5s ease';
         document.body.style.opacity = '1';
     }, 100);
-    
-    // Initialize theme based on saved preference
+
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
         setDarkMode(false);
     } else {
         setLightMode(false);
     }
-    
-    // Initialize Experience Popups
+
     initializeExperiencePopups();
 });
 
 // ===== EXPERIENCE POPUP FUNCTIONALITY =====
 function initializeExperiencePopups() {
-    // Remove any existing overlays first
-    const existingOverlays = document.querySelectorAll('.popup-overlay');
-    existingOverlays.forEach(o => o.remove());
-    
-    // Create NEW overlay and append to body
-    const overlay = document.createElement('div');
-    overlay.className = 'popup-overlay';
-    overlay.style.zIndex = '9998';
-    document.body.appendChild(overlay);
-    
-    console.log('Overlay created with z-index:', overlay.style.zIndex);
-    
-    // Get all timeline items
+    // Remove any stale overlays
+    document.querySelectorAll('.popup-overlay').forEach(o => o.remove());
+
+    // Create the dimming overlay and add it directly to <body>
+    const popupOverlay = document.createElement('div');
+    popupOverlay.className = 'popup-overlay';
+    document.body.appendChild(popupOverlay);
+
+    // ── FIX: Move every .timeline-popup to <body> ──────────────────────────
+    // Sections use opacity transitions which don't create a stacking context,
+    // but any future parent with transform/filter/will-change would trap a
+    // position:fixed child. Reparenting to <body> guarantees the popup always
+    // lives in the root stacking context, above the overlay (z-index 10000).
     const timelineItems = document.querySelectorAll('.timeline-content');
-    
-    console.log('Found timeline items:', timelineItems.length);
-    
+
     timelineItems.forEach((item, index) => {
         const popup = item.querySelector('.timeline-popup');
-        
+
         if (!popup) {
             console.warn('No popup found for timeline item', index);
             return;
         }
-        
-        // Force popup z-index
-        popup.style.zIndex = '9999';
-        console.log('Popup found for item', index, 'with z-index:', popup.style.zIndex);
-        
-        // Click to open popup
-        item.addEventListener('click', function(e) {
-            // Prevent opening if clicking on a link inside
+
+        // Move popup to body so it is never trapped in a parent stacking context
+        document.body.appendChild(popup);
+
+        // Click the card → toggle popup
+        item.addEventListener('click', function (e) {
             if (e.target.tagName === 'A') return;
-            
-            console.log('Timeline item clicked:', index);
-            
-            // Close any open popups first
+
+            // Close any other open popups first
             document.querySelectorAll('.timeline-popup.active').forEach(p => {
-                if (p !== popup) {
-                    p.classList.remove('active');
-                }
+                if (p !== popup) p.classList.remove('active');
             });
-            
-            // Toggle current popup
-            const isActive = popup.classList.contains('active');
+
             popup.classList.toggle('active');
-            overlay.classList.toggle('active', popup.classList.contains('active'));
-            
-            console.log('Popup active:', !isActive);
-            console.log('Popup z-index when active:', window.getComputedStyle(popup).zIndex);
-            console.log('Overlay z-index when active:', window.getComputedStyle(overlay).zIndex);
-            
-            // Prevent body scroll when popup is open
+            popupOverlay.classList.toggle('active', popup.classList.contains('active'));
+
             if (popup.classList.contains('active')) {
                 document.body.style.overflow = 'hidden';
-                lenis.stop(); // Stop Lenis scroll
+                lenis.stop();
             } else {
                 document.body.style.overflow = '';
-                lenis.start(); // Resume Lenis scroll
+                lenis.start();
             }
         });
     });
-    
-    // Close popup when clicking overlay
-    overlay.addEventListener('click', function() {
-        console.log('Overlay clicked - closing popups');
-        document.querySelectorAll('.timeline-popup.active').forEach(popup => {
-            popup.classList.remove('active');
+
+    // Close when clicking the dimming overlay
+    popupOverlay.addEventListener('click', function () {
+        document.querySelectorAll('.timeline-popup.active').forEach(p => {
+            p.classList.remove('active');
         });
-        overlay.classList.remove('active');
+        popupOverlay.classList.remove('active');
         document.body.style.overflow = '';
-        lenis.start(); // Resume Lenis scroll
+        lenis.start();
     });
-    
-    // Close popup with Escape key
-    document.addEventListener('keydown', function(e) {
+
+    // Close with Escape key
+    document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
-            console.log('Escape pressed - closing popups');
-            document.querySelectorAll('.timeline-popup.active').forEach(popup => {
-                popup.classList.remove('active');
+            document.querySelectorAll('.timeline-popup.active').forEach(p => {
+                p.classList.remove('active');
             });
-            overlay.classList.remove('active');
+            popupOverlay.classList.remove('active');
             document.body.style.overflow = '';
-            lenis.start(); // Resume Lenis scroll
+            lenis.start();
         }
     });
-    
-    // Prevent popup from closing when clicking inside it
+
+    // Prevent clicks inside popup from bubbling up to the overlay
     document.querySelectorAll('.timeline-popup').forEach(popup => {
-        popup.addEventListener('click', function(e) {
+        popup.addEventListener('click', function (e) {
             e.stopPropagation();
-            console.log('Clicked inside popup - preventing close');
         });
     });
 }
